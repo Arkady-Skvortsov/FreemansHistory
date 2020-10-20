@@ -1,0 +1,55 @@
+//Правильное подключение шрифтов!!
+@font-face {
+	font-family: 'RobotoSlab-VariableFont_wght';
+	src: url('fonts/RobotoSlab-VariableFont_wght.eot');
+	src: local('вє'), url('fonts/RobotoSlab-VariableFont_wght.woff') format('woff'), url('fonts/RobotoSlab-VariableFont_wght.ttf') format('truetype'), url('fonts/RobotoSlab-VariableFont_wght.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+	font-family: 'ReemKufi-Regular';
+	src: url('fonts/ReemKufi-Regular.eot');
+	src: local('вє'), url('fonts/ReemKufi-Regular.woff') format('woff'), url('fonts/ReemKufi-Regular.ttf') format('truetype'), url('fonts/ReemKufi-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+//Переменные
+$RobotoSlab: "RobotoSlab-VariableFont_wght";
+$ReemKufi: "ReemKufi-Regular";
+$w: white;
+$b: black;
+$fsize_1: 65px;
+$fsize_2: 25px;
+$fsize_3: 18px;
+$fsize_4: 30px;
+$fsize_5: 15px;
+$fsize_6: 13px;
+$lColor: #FF6B00;
+$ContainerHeight: 150px;
+$fChoice: 18px;
+$trans: .8s;
+
+//Миксины
+//Кнопки выбора судьбы Фримана
+@mixin ChoiceFrimansButtons($height, $width, $radius, $background) { 
+    height: $height;
+    width: $width;
+    border-radius: $radius;
+    background: $background;
+    transition: $trans;
+    opacity: .25;
+    font-size: $fsize_3;
+    border: 1px solid $w;
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+       opacity: 1;
+       transform: scale(.9);
+       box-shadow: 0 0 25px $background;  
+    } 
+}
