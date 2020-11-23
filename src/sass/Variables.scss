@@ -1,27 +1,31 @@
 //Правильное подключение шрифтов!!
-@font-face {
-	font-family: 'RobotoSlab-VariableFont_wght';
-	src: url('fonts/RobotoSlab-VariableFont_wght.eot');
-	src: local('вє'), url('fonts/RobotoSlab-VariableFont_wght.woff') format('woff'), url('fonts/RobotoSlab-VariableFont_wght.ttf') format('truetype'), url('fonts/RobotoSlab-VariableFont_wght.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-    font-display: swap;
-}
+// @font-face {
+//     font-family: "RobotoSlab-VariableFont_wght";
+//     src: url('../fonts/RobotoSlab/RobotoSlab-VariableFont_wght.eot');
+//     src: local('вє'), url('../fonts/RobotoSlab/RobotoSlab-VariableFont_wght.woff') format('woff'), url('../fonts/RobotoSlab/RobotoSlab-VariableFont_wght.ttf') format('truetype'), url('../fonts/RobotoSlab/RobotoSlab-VariableFont_wght.svg') format('svg');
+//     font-weight: bold;
+//     font-style: normal;
+// }
 
-@font-face {
-	font-family: 'ReemKufi-Regular';
-	src: url('fonts/ReemKufi-Regular.eot');
-	src: local('вє'), url('fonts/ReemKufi-Regular.woff') format('woff'), url('fonts/ReemKufi-Regular.ttf') format('truetype'), url('fonts/ReemKufi-Regular.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
+// @font-face {
+//     font-family: 'ReemKufi-Regular';
+//     src: url('../fonts/ReemKufi/ReemKufi-Regular.eot');
+//     src: local('вє'), url('../fonts/ReemKufi/ReemKufi-Regular.woff') format('woff'), url("../fonts/ReemKufi/ReemKufi-Regular.ttf') format('truetype'), url('../fonts/ReemKufi/ReemKufi-Regular.svg') format('svg');
+//     font-weight: normal;
+//     font-style: italic;
+// } //Разобраться с @font-face, хотя бы в том же Pickachu
+
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 //Переменные
-$RobotoSlab: "RobotoSlab-VariableFont_wght";
-$ReemKufi: "ReemKufi-Regular";
+$maxWidthDisplay: 1440;
+$RobotoSlab: "Roboto Slab", serif;
+$R: 'Reem Kufi', sans-serif;
 $w: white;
 $b: black;
+$g: green;
+$r: red;
 $fsize_1: 65px;
 $fsize_2: 25px;
 $fsize_3: 18px;
@@ -32,24 +36,71 @@ $lColor: #FF6B00;
 $ContainerHeight: 150px;
 $fChoice: 18px;
 $trans: .8s;
+$trans2: .6s;
 
 //Миксины
 //Кнопки выбора судьбы Фримана
-@mixin ChoiceFrimansButtons($height, $width, $radius, $background) { 
-    height: $height;
+@mixin ChoiceFrimansButtons($width, $radius, $background, $background2) { 
     width: $width;
     border-radius: $radius;
     background: $background;
-    transition: $trans;
-    opacity: .25;
+    transition: $trans2;
+    text-align: center;
     font-size: $fsize_3;
     border: 1px solid $w;
-    display: flex;
-    justify-content: space-between;
+    padding: 5px;
+    cursor: pointer;
+    color: $w;
 
     &:hover {
-       opacity: 1;
-       transform: scale(.9);
-       box-shadow: 0 0 25px $background;  
+       transform: scale(.8);
+       box-shadow: 0 0 30px $background2;  
+       background: $background2;
     } 
+}
+
+@mixin text2-start($steps, $steps2, $secs) {
+    width: $steps;
+    animation: count-start $secs steps($steps2), flashing-border 1s step-start infinite;
+
+    @keyframes count-start {
+       from {
+         width: 0;
+         opacity: 1;
+       } 
+
+       to {
+         width: $steps;   
+       }
+    }
+}
+
+@mixin text2-end($steps, $steps2, $secs) {
+    width: $steps;
+    animation: count-end $secs steps($steps2), flashing-border 1s step-start infinite; 
+
+    @keyframes count-end {
+       from {
+         width: $steps;
+       }   
+
+       to {
+         width: 0;
+         opacity: 0;
+       }
+    }
+}
+
+//Для адаптивного шрифта ${} in JS === # {} in SASS
+@mixin adaptiv_shrift($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $addMobSize: $addSize + $addSize * 0.7;
+
+    @media (max-width: 767px) {
+        font-size: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidthDisplay}));
+    }
+
+    @media (min-width: 767px) {
+       font-size: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidthDisplay})); 
+    }
 }

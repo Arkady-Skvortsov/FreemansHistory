@@ -4,11 +4,37 @@
 	<title>Final</title>
 	<meta charset="utf-8" />
 	<!-- icon -->
-    <link rel="shortcut icon" href="../dist/img/HL.png" type="image/png" />
+    <link rel="icon" href="./img/HL.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" /> 
 	<!-- css -->
-	<link rel="stylesheet" type="text/css" href="../dist/css/finalScreen.min.css" />
+	<link rel="stylesheet" type="text/css" href="./css/finalScreen.min.css" />
 </head>
 <body>
-    <script src="../dist/js/finalScreen.min.js"></script>
+	<div class="final-screen">
+		<audio src="./audio/Ending.mp3" autoplay></audio>
+
+		<div class="final-screen__achivment-block">
+			<div class="achivment-flex">
+			    <div class="achivment-img">
+				    <img class="a_img" src="./img/Limitles_potential.jpg"  />
+			    </div>
+               <div class="achivment-opisanie">
+               	    <div class="achivment-opisanie__flex">
+               	       <p class="achivment_name">Безграничный потенциал</p>
+            	       <p class="achivment_txt">Примите предложение Gman'a о трудоустройстве</p>
+            	    </div>
+               </div> 
+            </div>
+		</div> 
+
+		<div class="final-screen__information-block">
+           <div class="information-block__size">
+           	   <p class="information-block__txt">Субъект: Фримен</p>
+           	   <p class="information-block__txt">Статус: Нанят</p>
+           	   <p class="information-block__txt">В ожидании задания</p>
+           </div>			
+		</div>
+	</div>
+    <script src="./js/finalScreen.min.js"></script>
 </body>
 </html>

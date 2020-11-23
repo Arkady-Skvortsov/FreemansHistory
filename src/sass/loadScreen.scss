@@ -1,9 +1,239 @@
-@use "Variables" as "v";
+@import "Variables";
+
+body {
+   box-sizing: border-box;
+   height: 100%;
+   margin: 0;
+   overflow: hidden;
+   // background: url('../img/Black_Mesa_Preloader_1.jpg');
+   background-size: contain;
+}
 
 .loading-screen {
-	background: black;
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
+    min-height: 100vh;
+    overflow: hidden; 
+    background: $b;
+
+    audio {
+      display: none;
+    }
+
+    .content {
+	  margin: 110px auto;
+	  max-width: 720px;
+	  overflow: hidden;
+      opacity: 0;
+
+	  .content-valve {
+         display: flex;
+         flex-direction:column;
+
+         .logo {
+         	max-width: 272px;
+         	max-height: 55px;
+         	background: white;
+         	margin: 15px auto;
+         	color: white;
+         }
+	  }
+    }
+
+    .content-anim {
+        animation: valve 6s linear 1;
+     }
+
+
+      @keyframes valve { //Animation For Valve Block
+        0% {
+         opacity: 0;  
+        }
+
+        5% {
+         opacity: .2;   
+        }
+
+        15% {
+         opacity: .4;
+        }
+
+        25% {
+          opacity: .6;
+        }
+
+        35% {
+          opacity: .8;
+        }
+
+        45% {
+          opacity: 1;
+        }
+
+        55% {
+          opacity: 1;  
+        }
+
+        65% {
+          opacity: .8;  
+        }
+
+        75% {
+          opacity: .6;    
+        }
+
+        85% {
+          opacity: .4;
+        }
+
+        95% {
+          opacity: .2;  
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+
+    .content2 {
+    	max-width: 400px;
+    	margin: 205px auto; //205px
+    	overflow: hidden;
+        opacity: 0;
+
+    	.content-lambda {
+    		display: flex;
+            flex-direction: column;
+
+    		.lambda-block {
+    			margin: 0 auto;
+    			max-width: 380px;
+    		}
+    	 
+    		.content-lambda__txt {
+    		   font-family: $R;
+    		   color: $lColor;
+    		   margin: 15px auto;
+               @include adaptiv_shrift(65, 30); //Adaptiv mixin
+    		}
+    	}
+    }
+
+        .lambda-anim {
+            animation: lambda 6s linear 1;
+        }
+
+        @keyframes lambda {
+            0% {
+               opacity: 0;
+            }
+
+            5% {
+              opacity: .2;  
+            }
+
+            15% {
+               opacity: .4;   
+            }
+
+            25% {
+               opacity: .6;
+            }
+
+            35% {
+               opacity: .8; 
+            }
+
+            45% {
+               opacity: 1;    
+            }
+
+            55% {
+               opacity: 1; 
+            }
+
+            65% {
+              opacity: .8; 
+            }
+
+            75% {
+               opacity: .6;
+            }
+
+            85% {
+               opacity: .4;
+            }
+
+            95% {
+               opacity: .2; 
+            }
+
+            100% {
+               opacity: 0;
+               display: none;
+            }
+        }
+
+    .content3 {
+        margin: 25px auto;
+        max-width: 1440px;
+        overflow: hidden;
+        opacity: 0;
+
+        .content-load {
+            display: flex;
+            flex-direction: column;
+
+            .content-load__block {
+                min-width: 600px;
+                margin: 500px auto;
+
+                .content-load__number {
+                    margin: 0;
+                    color: $w;
+                    font-family: $R;
+                    @include adaptiv_shrift(60, 25);
+                    text-align: center;
+                }
+
+                .content-load__progress {
+                    border: 2px solid whtie;
+                    border-radius: 10px;
+                    height: 60px;
+                    width: 0%;
+                    background: $lColor;
+                }
+            }
+        }
+
+    }
+
+    .loading-animate {
+        animation: loading 2s linear 1;
+    }
+
+    @keyframes loading {
+        0% {
+           opacity: 0;
+        }
+
+        15% {
+           opacity: .2;
+        }
+
+        25% {
+           opacity: .4;
+        }
+
+        50% {
+           opacity: .6;
+        }
+
+        75% {
+           opacity: .8;
+        }
+
+        100% {
+           opacity: 1;
+        }
+    }
 }
+

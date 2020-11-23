@@ -1,18 +1,20 @@
-const {src, dest, series, watch} = require('gulp');
-const gulp = require('gulp');
-const del = require('del'); 
+const  {src, dest, series, watch} = require('gulp')
+const gulp = require('gulp')
+const del = require('del')
 /* Мы подключаем внутренние функции Gulp'a для того, чтобы каждый раз не писать их через ключевое слово */
-const babel = require('gulp-babel');
-const newer = require('gulp-newer'); //Это очень классный плагин, позволяющий проверять наличие уже оптимизированных файлов(.js || .png)..
-const uglify = require('gulp-uglify'); //В следующий раз возьму gulp-uglify-es
+const newer = require('gulp-newer') //Это очень классный плагин, позволяющий проверять наличие уже оптимизированных файлов(.js || .png)..
+const uglify = require('gulp-uglify') //В следующий раз возьму gulp-uglify-es
 // import {sass} from 'gulp-sass'; //ES6 formatter from Usually JS... Fuck Node.js 
-const sass = require('gulp-sass');
-const csso = require('gulp-csso');
-const htmlmin = require('gulp-htmlmin');
-const imagemin = require('gulp-imagemin');
-const autoprefixer = require('gulp-autoprefixer');
-const rename = require('gulp-rename');
-const sync = require('browser-sync').create();
+const sass = require('gulp-sass')
+const csso = require('gulp-csso')
+const browserify = require('gulp-browserify')
+const babel = require('gulp-babel')
+const htmlmin = require('gulp-htmlmin')
+const imagemin = require('gulp-imagemin')
+const autoprefixer = require( 'gulp-autoprefixer')
+const sourcemaps = require('gulp-sourcemaps')
+const rename = require('gulp-rename')
+const sync = require('browser-sync').create()
 
 //All paths (startPaths - what we need for watch and endPaths - where that was modified and minimalizing)
 let paths = {
@@ -20,15 +22,17 @@ let paths = {
       html: ["src/loadScreen.html", "src/singlePlayer.html", "src/finalScreen.html"],
       sass: ["src/sass/loadScreen.scss", "src/sass/singlePlayer.scss", "src/sass/finalScreen.scss", "src/sass/Variables.scss"],
       js: ["src/js/loadScreen.js", "src/js/singlePlayer.js", "src/js/finalScreen.js"],
-      images: "src/images/needImages/**/*"  
+      images: "src/images/needImages/**/*",
+      audio: "src/audio/**/*"
    },
    endPaths: {
-      distFolder: "dist/",
+      distFolder: 'dist/',
       css: "dist/css",
       js: "dist/js",
+      audio: "dist/audio",
       images: "dist/img"
    }
-}
+};
 
 //Let's start write a functions)
 
@@ -50,26 +54,33 @@ let html = () => {
 //work with css
 let css = () => {
     return src(paths.startPaths.sass)  
+         .pipe(sourcemaps.init())
          .pipe(sass())
          .pipe(autoprefixer({
             overrideBrowserslist: [' > 0.1%'] //так будет на много правильнее
          })) 
          .pipe(csso())
          .pipe(rename({suffix: ".min"}))
+         .pipe(sourcemaps.write('./'))
          .pipe(dest(paths.endPaths.css))
          .pipe(sync.stream());
 }
 
 //work with js
 let js = () => {
-    return src(paths.startPaths.js) 
+   return src(paths.startPaths.js)
+        .pipe(sourcemaps.init()) 
+        .pipe(browserify({
+          debug: true
+        }))
         .pipe(babel({
-           presets: ["@babel/preset-env"] 
+           presets: ["@babel/preset-env"]
         }))
         .pipe(uglify())
         .pipe(rename({suffix: ".min"}))
+        .pipe(sourcemaps.write('./'))
         .pipe(dest(paths.endPaths.js))
-        .pipe(sync.stream()); //Равноценно sync.reload()?
+        .pipe(sync.stream()) 
 }
 
 //work with images
@@ -79,6 +90,14 @@ let images = () => {
        .pipe(imagemin())
        .pipe(dest(paths.endPaths.images))
 }
+
+//audio files
+let audio = () => {
+	return src(paths.startPaths.audio)
+	    .pipe(dest(paths.endPaths.audio))
+}
+
+//fonts - @font-face(В следующий раз подключу нормально)
 
 //Clear files.. Это нужно, ведь каждый раз они будут обновляться
 let clear = () => {
@@ -90,7 +109,7 @@ let serve = () => {
    sync.init({
       server: {
       	 baseDir: "dist/",
-      	 index: "loadScreen.min.html"
+         index: "./loadScreen.min.html"
       },
       notify: false
    })
@@ -113,10 +132,9 @@ let Watch = () => {
    watch("src/**.html", html);
    watch("src/sass/**/*.scss", css);
    watch("src/js/**/*.js", js);
-   watch("src/images/needImages/", images);
 }
 
-exports.start = series(clear, html, images, css, js, gulp.parallel(serve, Watch)); // Develompent mode
+exports.default = series(clear, html, audio, images, css, js, gulp.parallel(serve, Watch)); // Develompent mode
 exports.Build = build; 
 
 //exports.default = parallel(Watch, serve)

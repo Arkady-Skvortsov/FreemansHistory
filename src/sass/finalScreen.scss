@@ -1,1 +1,288 @@
-@use "Variables" as "v";
+@import "Variables";
+
+body {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  .final-screen {
+     min-height: 100vh;
+     background: $b;
+     overflow: hidden;
+
+     .img-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .img {
+           max-height: 100vh;
+           min-width: 100vw;
+           margin: 0 auto;
+
+           &.strange {
+             animation: strange_anim 5s ease-in infinite;
+
+             @keyframes strange_anim {
+                0% {
+                  opacity: .2;
+                }
+
+                25% {
+                   opacity: .4;
+                }
+
+                50% {
+                   opacity: .6;
+                } 
+
+                75% {
+                   opacity: .8;
+                }
+
+                100% {
+                   opacity: 1;
+                }
+             }
+           }
+        }
+     }
+
+     .buttonsBlock {
+        max-width: 1000px;
+        margin: 325px auto;
+        background: $b;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+
+        button {
+           cursor: pointer;
+           padding: 20px;
+           margin: 20px;
+           font-size: 25px;
+           font-family: $R;
+           color: white;
+           transition: $trans;
+           z-index: 10000;
+           border: 0;
+        } 
+
+        .buttonRepeat {
+           background: $g;
+
+           &:hover {
+             box-shadow: 0 0 20px $g;
+           }
+        }
+
+        .buttonGoOn {
+           background: $r;
+
+           &:hover {
+             box-shadow: 0 0 20px $r;
+           }
+        }
+     }
+
+     audio {
+     	display: none;
+     }
+
+     .final-screen__achivment-block {
+     	transform: translateX(400px);
+     	max-width: 400px;
+     	position: relative;
+     	float: right;
+     	overflow: hidden;
+     	background: $b;
+
+     	@keyframes lighting {
+     		0% {
+              box-shadow: 0 0 5px $g;
+     		}
+
+     		15% {
+     		   box-shadow: 0 0 10px $g;
+     		}
+
+     		35% {
+              box-shadow: 0 0 25px $g;
+     		}
+
+     		45% {
+     		  box-shadow: 0 0 30px $g;	
+     		}
+
+     		55% {
+              box-shadow: 0 0 25px $g;
+     		}
+
+     		75% {
+              box-shadow: 0 0 15px $g;
+     		}
+
+     		95% {
+     		  box-shadow: 0 0 5px $g;	
+     		}
+
+     		100% {
+              box-shadow: 0;
+     		}
+     	}
+
+        @keyframes show {
+          0% {
+            transform: translateX(400px);
+          }
+
+          25% {
+            transform: translateX(300px); 
+          }
+
+          50% {
+            transform: translateX(200px); 
+          }  
+
+          75% {
+            transform: translateX(100px); 
+          }
+
+          100% {
+            transform: translateX(0);
+          } 
+        }
+
+        @keyframes hide {
+           0% {
+            opacity: .8;
+           }
+
+           25% {
+            opacity: .6;
+           }
+
+           50% {
+             opacity: .4;
+           }
+
+           75% {
+            opacity: .2;
+           }
+
+           100% {
+             opacity: 0;
+           }
+        }
+
+     	.achivment-flex {
+            display: flex;
+            flex-direction: row;
+            border: 0.1px solid $w;
+
+           .achivment-img {
+        	   max-width: 85px;
+        	   border-radius: 25px;
+
+        	   img {
+        	      max-width: 85px;
+        	      cursor: pointer;
+        	      padding-top: 6.5px;
+        	   }
+            }
+
+           .achivment-opisanie {
+           	   max-width: 215px;
+
+           	   .achivment-opisanie__flex {
+                  p {
+                    color: $w;
+                    font-family: $R;
+                    font-weight: 400;
+                    margin-top: 5px;
+
+                    &:first-child {
+                 	   @include adaptiv_shrift(15, 10);
+
+                    }
+
+                    &:last-child {
+                 	   @include adaptiv_shrift(12.5, 7);
+                    }
+                  }
+           	    }
+            }
+     	}
+     }
+
+     .final-screen__information-block {
+     	 max-width: 700px;
+     	 margin: 320px auto;
+     	 overflow: hidden;
+
+     	 .information-block__size {
+     	 	display: flex;
+     	 	flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            .information-block__txt {
+            	border-right: 4px solid $lColor;
+            	white-space: nowrap;
+              opacity: 1;
+            	overflow: hidden;
+            	color: $w;
+            	@include adaptiv_shrift(25, 15);
+            	font-family: $RobotoSlab;
+            	font-weight: 400;
+            	text-transform: uppercase;
+            }  
+     	 }
+
+     }
+  }   
+
+     .first-start {
+        @include text2-start(18ch, 18, 1s) 
+      }
+
+      .first-end {
+        @include text2-end(18ch, 18, 1s)
+        opacity: 0;
+      }
+
+      .second-start {
+         @include text2-start(14ch, 14, 2s)
+       }
+
+
+       .second-end {
+         @include text2-end(18ch, 18, 1s)
+         opacity: 0;
+       }
+
+      .third-start {
+          @include text2-start(22ch, 22, 3s)
+      }
+
+      .third-end {
+        @include text2-end(22ch, 22, 1s)
+        opacity: 0;
+      }
+
+      @keyframes flashing-border {
+        0% {
+          border-right: 4px solid $lColor; 
+        }
+
+        50% {
+          border-right: transparent;
+        }
+
+        100% { 
+          border-right: 4px solid $lColor;
+        }
+      }  
+}

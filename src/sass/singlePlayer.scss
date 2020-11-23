@@ -1,2 +1,486 @@
-@use 'Variables' as "v";
+@import 'Variables';
 
+::-webkit-scrollbar {
+     width: 20px;
+   }
+
+   ::-webkit-scrollbar-track {
+     background: black; 
+   }
+
+   ::-webkit-scrollbar-thumb {
+     background: $lColor; 
+   }
+
+   ::-webkit-scrollbar-thumb:hover {
+     opacity: .5;
+   }
+
+   ::-webkit-scrollbar-thumb:active {
+     opacity: 1;
+   } /* Для scrollbar */
+
+body {
+   height: 100%;
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   background: $b;
+
+   .single-player {
+   	  display: flex;
+   	  flex-direction: column;
+   	  align-content: space-between;
+
+   	  .history-blocks {
+   	  	 max-width: 100%;
+   	  	 max-height: 100vh;
+   	  	 // margin: 50px auto;
+   	  	 overflow: hidden;
+         z-index: 1000;
+
+         // &:not(:first-child) {
+         //   margin-top: 2000px;
+         // }
+
+   	  	 .history-block__content {
+   	  	   	display: flex;
+            max-width: 100%; 
+            margin: 0 auto;
+   	  	 }
+
+   	  	 .footer {
+           max-width: 100%;
+           background: rgb(0, 0, 0);
+           opacity: .65;
+           position: relative;
+
+           .footer-txt {
+              color: $w;
+              letter-spacing: 1px;
+              @include adaptiv_shrift(24, 15);
+              font-family: $R;
+              font-weight: 400px;
+           }
+   	  	}
+   	  }
+
+   	  .single-player__history-block {
+   	  	 background-image: url('../img/Black_Mesa_Before_Cascade_Resonanse.jpg');
+   	  	 background-size: cover;
+   	  	 background-position: center;
+
+         &.hide_first {
+           animation: hide_first 1s linear 1;
+
+           @keyframes hide_first {
+             0% {
+               opacity: .8;
+             }
+
+             15% {
+               opacity: .6;
+             }
+
+             25% {
+               opacity: .4;
+             }
+
+             35% {
+               opacity: .2;
+             }
+
+             45% {
+               opacity: 0;
+             }
+
+             55% {
+               opacity: .2;
+             }
+
+             65% {
+               opacity: .4;
+             }
+
+             75% {
+               opacity: .6;
+             }
+
+             80% {
+               opacity: .8;
+             }
+
+             100% {
+               opacity: 0;
+             }
+           }
+         }
+   	  	 
+         .history-block__content {
+
+           .content__Barney {	
+               max-width: 900px;
+               margin-top: -150px; //-150px
+               margin-left: 247px; // default(247px)
+               transform: scale(.75);
+               position: relaitve;
+
+             	img {
+             		max-width: 900px;
+             		height: 950px;
+             		object-fit: cover;
+             		object-position: center;
+             	}
+            }
+
+            .content__Freeman {
+            	max-width: 1000px;
+            	position: relative;
+            	margin-left: -750px; // default(-350px)
+            	margin-top: -180px; //-180px
+            	// transition: $trans;
+
+            	img {
+            		max-width: 1000px;
+            		height: 1000px;
+            		object-fit: cover;
+            		object-position: center;
+            	}
+            }
+         }
+
+         .footer {
+         	margin-top: -243px;
+         } 
+   	  }
+
+   	  .single-player__history-block2 {
+   	  	 background: url('../img/Black_Mesa_HEV_Mark_4.jpg');
+
+   	  	 .history-block__content {
+             justify-content: flex-start;  
+
+   	  	 	 .content__Freeman2 {
+   	  	 	 	max-width: 1000px;
+   	  	 	 	position: relative;
+   	  	 	 	margin-left: 150px;
+   	  	 	 	margin-top: 50px;
+                
+                img {
+                   max-width: 1000%;
+                   height: 800px;
+                   object-fit: cover;
+                   object-position: center;
+                } 
+   	  	 	 }
+   	  	 }
+
+   	  	 .footer {   	
+   	  	    margin-top: -273px;  	 	
+   	  	 }
+   	  }
+
+   	  .single-player__history-block3 {
+   	  	background-image: url("../img/Black_Mesa_Cascade_Resonanse.jpg");
+        background-position: center;
+        background-size: cover;    
+        
+        .history-block__content {
+        	justify-content: center;
+
+        	.content__Freeman3 {
+        		max-width: 1200px;
+
+
+        		img {
+        			max-width: 1300px;
+        			height: 800px;
+        			object-fit: cover;
+        			object-position: center;
+        		}
+        	}
+        }
+
+        .footer {
+        	margin-top: -223px;
+        }
+   	  }
+
+   	  .single-player__history-block4 {
+   	  	background-image: url("../img/Black_Mesa_Fight_with_Tentacle.jpg");
+   	  	background-size: cover;
+   	  	background-position: center;
+
+   	  	.history-block__content {
+   	  		justify-content: space-between;
+
+   	  		.content__Tentacle {
+   	  			max-width: 900px;
+
+   	  			img {
+   	  				max-width: 900px;
+   	  				object-fit: cover;
+   	  				object-position: center;
+   	  				height: 800px;
+
+   	  			}
+   	  		}
+
+   	  		.content__Freeman4 {
+   	  			max-width: 700px;
+
+   	  			img {
+   	  				max-width: 700px;
+   	  				height: 750px;
+                    object-fit: cover;
+                    object-position: center;
+   	  			}
+   	  		}
+   	    }
+
+        .footer {
+          margin-top: -224px;
+        }
+   	  }
+
+   	  .single-player__history-block5 {
+   	  	background-image: url("../img/Black_Mesa_Open_Air.jpg");
+   	  	background-size: cover;
+
+   	  	.history-block__content {
+   	  		justify-content: center;
+
+   	  		.content__Freeman5 {
+                max-width: 2200px; 
+
+   	  			img {
+                   max-width: 2200px;
+                   height: 800px;
+                   object-position: center;
+                   object-fit: cover;
+   	  			}
+   	  		}
+   	  	}
+
+   	  	.footer {
+   	  	   margin-top: -223px;
+   	  	}
+   	  }
+
+   	  .single-player__history-block6 {
+   	  	background-image: url("../img/Black_Mesa_Lambda_Tonnel.jpg");
+   	  	background-position: center;
+   	  	background-size: cover;
+
+   	  	.history-block__content {
+   	  		justify-content: space-between;
+
+   	  		.content__Gargantua {
+   	  			max-width: 950px;
+
+   	  			img {
+   	  				max-width: 950px;
+   	  				height: 850px;
+   	  				object-fit: cover;
+   	  				object-position: center;
+   	  			}
+   	  		}
+
+   	  		.content__Freeman6 {
+   	  			max-width: 800px;
+   	  			transform: translateX(-150px);
+
+   	  			img {
+   	  				max-width: 800px;
+   	  				height: 800px;
+   	  				object-fit: cover;
+   	  				object-position: center;
+   	  			}
+   	  		}
+   	  	}
+
+   	  	.footer {
+   	  		margin-top: -236px;
+   	  	}
+   	  }
+
+   	  .single-player__history-block7 {
+   	  	 background-image: url('../img/Portal_in_Xen.png');
+   	  	 background-size: cover;
+   	  	 background-position: right;
+
+   	  	 .history-block__content {
+   	  	 	justify-content: flex-end;
+
+   	  	 	.content__Freeman7 {
+   	  	 		max-width: 250px;
+   	  	 		transfrom: translateX(-200px);
+
+   	  	 		img {
+   	  	 			max-width: 250px;
+   	  	 			height: 450px;
+   	  	 			object-position: center;
+   	  	 			object-fit: cover;
+   	  	 		}
+   	  	 	}
+   	  	 }
+
+   	  // .footer {
+   	  // 	  	margin-top: -243px;
+   	  // }
+   	  }
+
+   	  .single-player__history-block8 {
+   	  	 background-image: url("../img/Gonarch_battle.jpg");
+   	  	 background-size: cover;
+   	  	 background-position: center;
+
+   	  	 .history-block__content {
+   	  	 	justify-content: space-between;
+
+   	  	 	.content__Gonarch {
+                max-width: 1300px;
+                position: relative;
+                margin-top: 200px;
+                margin-left: -100px;
+
+   	  	 		img {
+                   max-width: 1300px;
+                   object-position: center;
+                   object-fit: cover;
+   	  	 		}
+   	  	 	}
+
+   	  	 	.content__Freeman8 {
+   	  	 		max-width: 2000px;
+   	  	 		position: relative;
+   	  	 		margin-left: -1600px;
+
+   	  	 		img {
+   	  	 			max-width: 2000px;
+   	  	 			transform: rotate(-20deg);
+   	  	 			object-position: center;
+   	  	 			object-fit: cover;
+   	  	 		}
+   	  	 	}
+   	  	 }
+
+   	  	 .footer {
+   	  	 	margin-top: -485px;
+   	  	 }
+   	  }
+
+   	  .single-player__history-block9 {
+   	  	 background-image: url("../img/Battle_with_soldier.jpg");
+   	  	 background-position: center;
+         background-size: cover;
+
+         .history-block__content {
+         	justify-content: flex-start;
+
+         	.content__Xen-Guard {
+         		max-width: 1300px;
+         		margin-left: 100px;
+         		margin-top: 145px;
+
+         		img {
+         		  max-width: 1300px;
+         		  object-position: center;
+         		  object-fit: cover;
+         		}
+         	}
+
+         	.content__Freeman9 {
+         		max-width: 1200px;
+         		margin-top: 145px;
+         		margin-left: -1100px;
+         		transform: rotate(-0.5deg);
+
+         		img {
+         			max-width: 1200px;
+         			object-position: center;
+         			object-fit: cover;
+         		}
+         	}
+         }
+
+         .footer {
+         	margin-top: -300px;
+         }
+   	  }
+
+   	  .single-player__history-block10 {
+   	  	background-image: url("../img/Nihilanth_battle.jpg");
+   	  	background-size: cover;
+   	  	background-position: center;
+
+   	    .history-block__content {
+   	    	justify-content: flex-start;
+
+   	    	.content_Freeman10 {
+   	    		max-width: 450px;
+
+   	    		img {
+   	    			max-width: 450px;
+   	    			min-height: 400px;
+   	    		}
+   	    	}
+   	    }
+
+   	    .footer  {
+   	    	margin-top: -95px;
+   	    }
+   	  }
+
+   	  .single-player__history-block11 {
+   	  	 background-image: url("../img/Black_Mesa_final.png");
+   	  	 background-posiiton: center;
+   	  	 background-size: cover;
+
+   	  	 .history-block__content { 
+            justify-content: space-between;
+
+            .content__Gman {
+            	max-width: 1500px;
+
+            	img {
+            		max-width: 1500px;
+            		object-fit: cover;
+            		object-position: center;
+            	}
+            }
+
+            .content__Freeman11 {
+            	max-width: 1200px;
+            	margin-left: -900px;
+            	margin-top: 200px;
+
+            	img {
+            		max-width: 900px;
+            		object-position: center;
+            		object-fit: cover;
+            	}
+            }
+   	  	 }
+
+   	  	 .choice-block {
+   	  	 	max-width: 1000px;
+   	  	 	margin-top: -435px;
+   	  	 	margin-left: 300px;
+
+   	  	 	.controls-block {
+   	  	 		display: flex;
+   	  	 		justify-content: space-around;
+
+   	  	 		.choice-block__button_1 {
+   	  	 			@include ChoiceFrimansButtons(300px, 30px, rgba(255, 0, 0, .25), rgba(255, 0, 0, 1));
+   	  	 		}
+
+   	  	 		.choice-block__button_2 {
+   	  	 			@include ChoiceFrimansButtons(300px, 30px, rgba(36, 255, 0, .25), rgba(36, 255, 0, 1));
+   	  	 		}
+   	  	 	}
+   	  	 }
+   	  }
+   }
+}
