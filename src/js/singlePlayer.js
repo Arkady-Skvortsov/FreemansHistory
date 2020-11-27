@@ -14,16 +14,47 @@ let FrChoice = new Boolean
 module.exports = FrChoice
 
 window.addEventListener('load', () => {
-      let single_player = document.querySelector('.single-player');
+      let options = {
+        threshold: 0.5
+      }
+      
+      let callback = (entries, observer) => {
+         entries.forEach(entry => {
+            let el = entry.target
+            let audio =  el.children[0].children[0]
+
+            if(entry.isIntersecting) {
+              if(audio.paused) {
+                audio.play()
+              }
+
+              el.classList.add('anim')
+
+              el.style.opacity = 1
+            } else {
+              audio.pause()
+              audio.currentTime = 0
+            
+              el.classList.remove('anim')
+
+              el.style.opacity = 0
+            }
+         })
+      }
+      
+      let history_blocks = document.querySelectorAll('.history-blocks');
       let buttons = document.querySelectorAll('.buttons');
+      let buttons2 = [...buttons];
 
-      let arr2 = [...buttons];
-
-      arr2.map((item) => {
+      buttons2.map((item) => {
          item.addEventListener("click", () => {
              window.location.assign('../finalScreen.min.html')
          })
       })
+
+      let observer = new IntersectionObserver(callback, options);
+
+      history_blocks.forEach((block) => observer.observe(block)) 
 })
 
    
